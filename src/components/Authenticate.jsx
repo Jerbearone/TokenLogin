@@ -12,13 +12,11 @@ export default function Authenticate({token, setToken}) {
             const response = await fetch(url, {
                 method: "GET",
                 headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`},
-                
             });
             const data = await response.json();
+            console.log(data);
             setSuccessMessage(data.message);
-            console.log(successMessage);
-
-
+            console.log("successMessage: " + data.message);
         }catch(error){
             setError(error.message);
         }
