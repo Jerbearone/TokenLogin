@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function Authenticate({token, setToken}) {
     const [successMessage, setSuccessMessage] = useState(null);
     const [error, setError] = useState(null);
+    const [userName, setUserName] = useState(null);
 
     const handleAuthClick = async() => {
         console.log("handling auth...");
@@ -17,6 +18,8 @@ export default function Authenticate({token, setToken}) {
             console.log(data);
             setSuccessMessage(data.message);
             console.log("successMessage: " + data.message);
+            //set user name after authenticate
+            setUserName(data.data.username)
         }catch(error){
             setError(error.message);
         }
@@ -27,6 +30,7 @@ export default function Authenticate({token, setToken}) {
                 Authenticate!
             </h2>
             {successMessage && <p>Info Successfully Sent!</p>}
+            {userName && <p>You have been authenticated {userName}!</p>}
             {error && <p>{error}</p>}
             <button onClick={handleAuthClick}>Authenticate Token</button>
 
